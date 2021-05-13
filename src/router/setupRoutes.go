@@ -16,6 +16,9 @@ func SetupRouter() error {
 	r.HandleFunc(`/{id:[\d]+}`, func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "view/index.html")
 	})
+	r.HandleFunc(`/public/{file:[\w\W\/]+}`, func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, r.URL.Path[1:])
+	})
 	r.HandleFunc(`/api/{id:[\d]+}`, controllers.Api)
 	r.HandleFunc("/upload/", controllers.UploadFile)
 

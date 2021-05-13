@@ -3,7 +3,6 @@ package controllers
 import (
 	"fmt"
 	"io"
-	"log"
 	"mime"
 	"net/http"
 	"strconv"
@@ -27,9 +26,8 @@ func GetFile(w http.ResponseWriter, r *http.Request) {
 
 	go data.GetFile(id, fileChan)
 
-	log.Println("error 2")
 	// Im using this for fomart the attachments and others stuff for make me more easy the work
-	cd := mime.FormatMediaType("attachment", map[string]string{"filename": name})
+	cd := mime.FormatMediaType("attachment", map[string]string{"filename": name[:len(name)-1]})
 	w.Header().Set("Content-Disposition", cd)
 	// send the file for download
 	http.ServeContent(w, r, name, time.Now(), <-fileChan)
