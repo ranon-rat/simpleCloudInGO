@@ -15,15 +15,6 @@ func getConnection() *sql.DB {
 	}
 	return db
 }
-func GetSize() int {
-	db := getConnection()
-	m, _ := db.Query("SELECT COUNT(*) FROM uploadfile")
-	many := 0
-	for m.Next() {
-		m.Scan(&many)
-	}
-	return many
-}
 
 // this check if the database have the same filename in the database
 func Exist(header int) error {

@@ -9,15 +9,15 @@ import (
 
 func SetupRouter() error {
 	r := mux.NewRouter()
-	r.HandleFunc("/", nil)
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/1", http.StatusNotModified)
+	})
+	r.HandleFunc(`/{id:[\d]+}`, func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "")
+	})
+	r.HandleFunc(`/api/{id:[\d]+}`, controllers.Api)
 	r.HandleFunc("/upload", controllers.UploadFile)
-	/*
-		what does it mean the regex
-		```regex
-		\w=QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm
-		\W=1234567890'¡`+´Ç,.-<ºª!"·$%&/()==?¿^*¨Ç;:_ŒÆÆ€®†¥  Ø∏[~§¶™ƒ∆∫Å∑©√ß µ„…–{}[[][∏Ø" ....
-		```
-	*/r.HandleFunc(`/getFile/{id:[\d]+}/`, controllers.GetFile)
+	r.HandleFunc(`/getFile/{id:[\d]+}/`, controllers.GetFile)
 
 	return http.ListenAndServe(":8080", nil)
 

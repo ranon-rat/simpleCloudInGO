@@ -1,8 +1,8 @@
 package stuff
 
 type Api struct {
-	File []File `json:"Files"`
-	Size int    `json:"size"`
+	Files []File `json:"Files"`
+	Size  int    `json:"size"`
 }
 type File struct {
 	Id   int    `json:"id"`
