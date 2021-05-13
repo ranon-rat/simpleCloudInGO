@@ -10,9 +10,9 @@ import (
 
 func SetupRouter() error {
 	r := mux.NewRouter().StrictSlash(true)
-	/*	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/1", http.StatusNotModified)
-	})*/
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/1", http.StatusPermanentRedirect)
+	})
 	r.HandleFunc(`/{id:[\d]+}`, func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "view/index.html")
 	})
