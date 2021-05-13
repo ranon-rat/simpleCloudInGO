@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="public/style/style.css">
+    <link rel="stylesheet" href="public/style/upload.css">
     <title>Document</title>
   </head>
   <body>
-    <form
-      enctype="multipart/form-data"
-      action="/upload/"
-      method="POST"
-    >
-      <input type="file" name="myFile" />
-      <input type="submit" value="upload" />
-    </form>
+    <div id="post">
+      <form enctype="multipart/form-data" action="/upload/" method="POST">
+        <input type="file" name="myFile" />
+        <input type="submit" value="upload" />
+      </form>
+    </div>
   </body>
 </html>

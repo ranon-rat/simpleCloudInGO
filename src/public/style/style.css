@@ -3,13 +3,3 @@ body{
     font-family: sans-serif;
     color:rbg(255,255,255);
 }
-#title{
-    color:rgb(255,255,255);
-    text-align: center;
-    font-size: 10em;
-}
-.image-file{
-    width: 100px;
-    height: 100px;
-   
-}

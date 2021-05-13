@@ -11,7 +11,7 @@ fetch("/api/" + window.location.pathname.slice(1))
       document.getElementById("files").innerHTML+=`
       <p class="file">
         <a href="/getFile/${i.id}/${i.filename}">
-          <div  style="background-image:url('/getFile/${i.id}/${i.filename}')" class="image-file">
+         <span class="id">${i.id}</span> <span class="filename">${i.filename}</span>
           </div>
          </a>
       </p>`

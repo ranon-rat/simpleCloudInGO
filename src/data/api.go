@@ -1,8 +1,6 @@
 package data
 
 import (
-	"log"
-
 	"github.com/ranon-rat/simpleCloudInGO/src/stuff"
 )
 
@@ -24,7 +22,6 @@ func GetFilesName(min, size int, filesChan chan []stuff.File) {
 
 	db := getConnection()
 	defer db.Close()
-	log.Println("starting")
 	rows, _ := db.Query(q, (size - (min * howMany)), (size-(min*howMany)+howMany)+1)
 
 	var filesList []stuff.File
