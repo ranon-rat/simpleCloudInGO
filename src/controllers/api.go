@@ -13,9 +13,12 @@ import (
 func Api(w http.ResponseWriter, r *http.Request) {
 	filesChan := make(chan []stuff.File)
 	id, _ := strconv.Atoi(mux.Vars(r)["id"])
-	data.GetFilesName(id, filesChan)
+	size := data.GetSize()
+
+	go data.GetFilesName(id, size, filesChan)
+
 	json.NewEncoder(w).Encode(stuff.Api{
 		Files: <-filesChan,
-		Size:  data.GetSize(),
+		Size:  size,
 	})
 }

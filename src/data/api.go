@@ -1,6 +1,8 @@
 package data
 
 import (
+	"log"
+
 	"github.com/ranon-rat/simpleCloudInGO/src/stuff"
 )
 
@@ -17,27 +19,27 @@ func GetSize() int {
 
 	return many
 }
-func GetFilesName(min int, filesChan chan []stuff.File) {
-	q := `SELECT id,name FROM uploadfile
-	WHERE  rowid >=?1 AND  rowid <=?2
-	ORDER BY id DESC ;` // get the filename and other stuff
+func GetFilesName(min, size int, filesChan chan []stuff.File) {
+	q := `SELECT id,name FROM uploadfile WHERE  rowid >=?1 AND  rowid <=?2 ORDER BY id DESC ;` // get the filename and other stuff
 
 	db := getConnection()
 	defer db.Close()
+	log.Println("starting")
+	rows, err := db.Query(q, (size - (min * howMany)), (size-(min*howMany)+howMany)+1)
 
-	size := GetSize()
-
-	rows, _ := db.Query(q, (size - (min * howMany)), (size-(min*howMany)+howMany)+1)
-
+	if err != nil {
+		log.Println(err)
+		close(filesChan)
+	}
 	var filesList []stuff.File
-
 	for rows.Next() {
-		name := ""
-		id := 0
-		rows.Scan(&id, &name)
-		filesList = append(filesList, stuff.File{
-			Name: name, Id: id,
-		})
+		var file stuff.File
+		if err := rows.Scan(&file.Id, &file.Name); err != nil {
+			log.Println(err)
+			close(filesChan)
+		}
+
+		filesList = append(filesList, file)
 
 	}
 
