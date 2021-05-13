@@ -28,7 +28,7 @@ func GetSize() int {
 // this check if the database have the same filename in the database
 func Exist(header int) error {
 	db := getConnection()
-	r, _ := db.Query("SELECT COUNT(*) FROM uploadfile WHERE name=?1 ", header)
+	r, _ := db.Query("SELECT COUNT(*) FROM uploadfile WHERE id=?1 ", header)
 	howMany := 0
 	for r.Next() {
 		r.Scan(&howMany)
