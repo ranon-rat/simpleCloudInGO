@@ -39,11 +39,6 @@ func checkUpload(w http.ResponseWriter, r *http.Request) *httpCodeError {
 
 	}
 
-	g.Go(func() error { return data.Exist(handler.Filename) })
-	if err := g.Wait(); err != nil {
-		http.Error(w, err.Error(), 400)
-	}
-
 	g.Go(func() error { return data.UploadFile(file, handler) })
 	if err := g.Wait(); err != nil {
 		log.Println(err)
