@@ -14,12 +14,12 @@ func SetupRouter() error {
 		http.Redirect(w, r, "/1", http.StatusNotModified)
 	})*/
 	r.HandleFunc(`/{id:[\d]+}`, func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "public/index.html")
+		http.ServeFile(w, r, "view/index.html")
 	})
 	r.HandleFunc(`/api/{id:[\d]+}`, controllers.Api)
 	r.HandleFunc("/upload/", controllers.UploadFile)
 
-	r.HandleFunc(`/getFile/{id:[\d]+}/`, controllers.GetFile)
+	r.HandleFunc(`/getFile/{id:[\d]+}/{name:[\w\W]+}/`, controllers.GetFile)
 	// action="/uploadfile
 	log.Println("running on localhost:8080")
 	return http.ListenAndServe(":8080", r)

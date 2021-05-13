@@ -18,9 +18,9 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Err, err.Code)
 
 		}
-		http.ServeFile(w, r, "public/upload.html")
+		http.ServeFile(w, r, "view/upload.html")
 	case "GET":
-		http.ServeFile(w, r, "public/upload.html")
+		http.ServeFile(w, r, "view/upload.html")
 
 	}
 }

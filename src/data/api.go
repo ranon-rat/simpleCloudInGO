@@ -25,19 +25,12 @@ func GetFilesName(min, size int, filesChan chan []stuff.File) {
 	db := getConnection()
 	defer db.Close()
 	log.Println("starting")
-	rows, err := db.Query(q, (size - (min * howMany)), (size-(min*howMany)+howMany)+1)
+	rows, _ := db.Query(q, (size - (min * howMany)), (size-(min*howMany)+howMany)+1)
 
-	if err != nil {
-		log.Println(err)
-		close(filesChan)
-	}
 	var filesList []stuff.File
 	for rows.Next() {
 		var file stuff.File
-		if err := rows.Scan(&file.Id, &file.Name); err != nil {
-			log.Println(err)
-			close(filesChan)
-		}
+		rows.Scan(&file.Id, &file.Name)
 
 		filesList = append(filesList, file)
 

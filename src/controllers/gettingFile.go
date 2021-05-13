@@ -22,15 +22,12 @@ func GetFile(w http.ResponseWriter, r *http.Request) {
 	g.Go(func() error { return data.Exist(id) })
 	if g.Wait() == nil { // if the file exist return an error for that we are doing this
 		http.Error(w, fmt.Sprint("file:", idStr, " doesnt find"), 404)
+		return
 	}
 
-	g.Go(func() error { return data.GetFile(id, fileChan) })
-	if err := g.Wait(); err != nil {
-		log.Println(err)
-		http.Error(w, "internal server error", 500)
-		// if we get an error its going to be from the server so we are checking that
-	}
+	go data.GetFile(id, fileChan)
 
+	log.Println("error 2")
 	// Im using this for fomart the attachments and others stuff for make me more easy the work
 	cd := mime.FormatMediaType("attachment", map[string]string{"filename": name})
 	w.Header().Set("Content-Disposition", cd)

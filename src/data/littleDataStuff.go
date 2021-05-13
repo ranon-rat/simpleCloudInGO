@@ -19,12 +19,12 @@ func getConnection() *sql.DB {
 // this check if the database have the same filename in the database
 func Exist(header int) error {
 	db := getConnection()
-	r, _ := db.Query("SELECT COUNT(*) FROM uploadfile WHERE id=?1 ", header)
+	r, _ := db.Query("SELECT COUNT(*) FROM uploadfile WHERE id=?1;", header)
 	howMany := 0
 	for r.Next() {
 		r.Scan(&howMany)
 	}
-	if howMany < 0 {
+	if howMany > 0 {
 		return errors.New("your file already exist in the database")
 	}
 	return nil
