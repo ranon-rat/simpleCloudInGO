@@ -6,7 +6,7 @@ WORKDIR /go/cloud/src/public/script
 # update some stuff
 RUN apk update && apk upgrade && apk add build-base
 # install the dependencies
-RUN apk add npm&& apk add sqlite3
+RUN apk add npm&& apk add sqlite
 # compile the typescript
 RUN npm install typescript -g
 RUN tsc *.ts; rm -rf *.ts
