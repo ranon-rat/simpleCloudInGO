@@ -1,10 +1,8 @@
 package controllers
 
 import (
-	"fmt"
 	"log"
 	"net/http"
-	"text/template"
 
 	"github.com/ranon-rat/simpleCloudInGO/src/data"
 	"github.com/ranon-rat/simpleCloudInGO/src/stuff"
@@ -12,22 +10,18 @@ import (
 )
 
 func UploadFile(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method)
 	switch r.Method {
-	case "GET":
-		f, err := template.ParseFiles("public/upload.html")
-		if err != nil {
-			fmt.Println(err)
-		}
-		if err := f.Execute(w, r); err != nil {
-			fmt.Println(err)
-		}
-		return
-	default:
+	case "POST":
 		if err := checkUpload(w, r); err != nil {
 			log.Println(err.Err)
 			http.Error(w, err.Err, err.Code)
-			return
+
 		}
+
+	case "GET":
+		http.ServeFile(w, r, "public/upload.html")
+
 	}
 }
 
@@ -35,8 +29,8 @@ func checkUpload(w http.ResponseWriter, r *http.Request) *stuff.HttpCodeError {
 	g := new(errgroup.Group)
 	file, handler, err := r.FormFile("myFile")
 	if err != nil {
-		log.Println(err)
-		return &stuff.HttpCodeError{Err: err.Error(), Code: 500}
+
+		return nil
 	}
 
 	if handler.Size == 0 {
