@@ -1,6 +1,7 @@
 package router
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -8,17 +9,19 @@ import (
 )
 
 func SetupRouter() error {
-	r := mux.NewRouter()
-	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	r := mux.NewRouter().StrictSlash(true)
+	/*	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/1", http.StatusNotModified)
-	})
+	})*/
 	r.HandleFunc(`/{id:[\d]+}`, func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "")
+		http.ServeFile(w, r, "public/index.html")
 	})
 	r.HandleFunc(`/api/{id:[\d]+}`, controllers.Api)
-	r.HandleFunc("/upload", controllers.UploadFile)
-	r.HandleFunc(`/getFile/{id:[\d]+}/`, controllers.GetFile)
+	r.HandleFunc("/upload/", controllers.UploadFile)
 
-	return http.ListenAndServe(":8080", nil)
+	r.HandleFunc(`/getFile/{id:[\d]+}/`, controllers.GetFile)
+	// action="/uploadfile
+	log.Println("running on localhost:8080")
+	return http.ListenAndServe(":8080", r)
 
 }

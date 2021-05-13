@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"text/template"
 
 	"github.com/ranon-rat/simpleCloudInGO/src/data"
 	"github.com/ranon-rat/simpleCloudInGO/src/stuff"
@@ -12,17 +14,20 @@ import (
 func UploadFile(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
+		f, err := template.ParseFiles("public/upload.html")
+		if err != nil {
+			fmt.Println(err)
+		}
+		if err := f.Execute(w, r); err != nil {
+			fmt.Println(err)
+		}
 		return
-	case "POST":
+	default:
 		if err := checkUpload(w, r); err != nil {
+			log.Println(err.Err)
 			http.Error(w, err.Err, err.Code)
 			return
 		}
-
-	default:
-		w.Write([]byte("ñao ñao voce e gay"))
-		return
-
 	}
 }
 
