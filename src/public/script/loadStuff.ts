@@ -9,12 +9,12 @@ fetch("/api/" + window.location.pathname.slice(1))
     d.files.forEach((i) => {
  
       document.getElementById("files").innerHTML+=`
-      <p class="file">
+      <div class="file">
         <a href="/getFile/${i.id}/${i.filename}">
-         <span class="id">${i.id}</span> <span class="filename">${i.filename}</span>
+         <div class="id">${i.id}</div> <div class="filename">${i.filename}</div>
           </div>
          </a>
-      </p>`
+      </div>`
     });
     
 

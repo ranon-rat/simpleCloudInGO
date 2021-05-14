@@ -1,7 +1,7 @@
-#title{
-    color:rgb(255,255,255);
-    text-align: center;
-    font-size: 10em;
+
+a{
+    text-decoration: none;
+    color:white;
 }
 .image-file{
     width: 100px;
@@ -9,20 +9,29 @@
    
 }
 .file{
+    margin:auto;
     padding-top: 10px;
-    border-color:darksalmon;
+    border-color:rgb(48, 45, 58);
     border-width: 10px;
+    
 }
 .id{
-  
+    display: inline;
     font-size:2em;
-} 
-a{
-    color:white;
 }
 .filename{
-    background-color:rgb(0, 255, 255);
-    color:darkcyan;
-    float:right;
+    
+    
+    width: 100%;
+    background-color: rgb(70, 70, 70);
+    color:#ffff;
+  
+    
+
     font-size:2em;
+} 
+
+#files{
+    background-color: rgb(24, 24, 24) ;
+    
 }

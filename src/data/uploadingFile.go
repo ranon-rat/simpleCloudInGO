@@ -12,19 +12,11 @@ func UploadFile(file multipart.File, header *multipart.FileHeader) error {
 	q := `INSERT INTO uploadfile( name,file ) VALUES(?1,?2)` // insert the name and  the file
 	db := getConnection()                                    //get the connection
 	defer db.Close()
-
 	// convert the file multipart.File into a binary type
 	fileBinary, _ := ioutil.ReadAll(file)
-	stm, err := db.Prepare(q)
-
-	if err != nil {
-
-		log.Println("err in file uploadingFileGo/src/data/uploadingFile.go line 15")
-		return err
-	}
+	stm, _ := db.Prepare(q)
 
 	defer stm.Close()
-
 	columns, err := stm.Exec(header.Filename, fileBinary)
 	if err != nil {
 		log.Println("err in file uploadingFileGo/src/data/uploadingFile.go line 21")

@@ -1,0 +1,50 @@
+
+
+#background-glow{
+    margin: auto;
+    width:20em;
+    height:20em;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow:
+    /*  0 0 60px 30px #fff,  /* inner white */
+      0 0 100px 6px #f0f; /* middle magenta */
+      /*0 0 140px 90px #0ff; /* outer cyan */
+}
+#post-file {
+    color:#fff;
+    background-color: rgb(24, 24, 24);
+    border-color: rgb(24, 24, 24);
+    width: 20em;
+    height: 20em;
+    margin: auto;
+    border-width: 10px;
+    border-radius: 6px;
+    border-style: solid;
+  }
+input,
+button,
+#file-input {
+  background-color: rgb(70, 70, 70);
+  color: #ffff;
+  border: none;
+  border-radius: 6px;
+ 
+}
+#file-input> span{
+    margin:auto;
+}
+
+
+#upload-file-button,#file-input {
+  width: 10em;
+  height: 3em;
+}
+#upload-file-button:hover {
+  background-color: rgb(99, 98, 98);
+}
+#title{
+    color:rgb(255,255,255);
+    text-align: center;
+    font-size: 5em;
+}

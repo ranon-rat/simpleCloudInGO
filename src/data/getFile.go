@@ -16,16 +16,17 @@ func GetFile(id int, fileChan chan io.ReadSeeker) error {
 		log.Println("error at line 8 in file uploadingFileGo/src/data/getFile.go")
 		return err
 	}
-	var binaryFile []byte
+	binaryFile := new([]byte) //= []byte{14, 14, 14}
 
 	for row.Next() {
-		if err := row.Scan(&binaryFile); err != nil {
+		if err := row.Scan(binaryFile); err != nil {
 			log.Println("error at line 21 in file uploadingFileGo/src/data/getFile.go")
 			return err
 		}
 
 	}
-	fileChan <- bytes.NewReader(binaryFile)
+
+	fileChan <- bytes.NewReader(*binaryFile)
 
 	return nil
 
