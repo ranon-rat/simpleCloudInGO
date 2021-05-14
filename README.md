@@ -9,5 +9,5 @@ its a really simple cloud and its finished but the frontend its a little bit shi
 ![image](https://media.discordapp.net/attachments/820472030474272769/842841928617164810/Screen_Shot_2021-05-14_at_14.12.38.png?width=1584&height=943)
 
 
-# give me stars
+# give me a star
 ![image](https://user-images.githubusercontent.com/66473662/118324614-e184cb00-b4c7-11eb-8e9c-4812996e736c.png)
