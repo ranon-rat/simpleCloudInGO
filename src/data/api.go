@@ -8,12 +8,8 @@ func GetSize() int {
 	db := getConnection()
 	defer db.Close()
 
-	m, _ := db.Query("SELECT COUNT(*) FROM uploadfile")
 	many := 0
-
-	for m.Next() {
-		m.Scan(&many)
-	}
+	db.QueryRow("SELECT COUNT(*) FROM uploadfile").Scan(&many)
 
 	return many
 }
