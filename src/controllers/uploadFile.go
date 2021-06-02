@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/ranon-rat/simpleCloudInGO/src/data"
-	"github.com/ranon-rat/simpleCloudInGO/src/stuff"
+	"github.com/ranon-rat/simpleCloudInGO/src/interfaces"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -18,14 +18,14 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Err, err.Code)
 
 		}
-		http.ServeFile(w, r, "view/upload.html")
+		http.ServeFile(w, r, "./views/upload.html")
 	case "GET":
-		http.ServeFile(w, r, "view/upload.html")
+		http.ServeFile(w, r, "./views/upload.html")
 
 	}
 }
 
-func checkUpload(w http.ResponseWriter, r *http.Request) *stuff.HttpCodeError {
+func checkUpload(w http.ResponseWriter, r *http.Request) *interfaces.HttpCodeError {
 	g := new(errgroup.Group)
 	file, handler, err := r.FormFile("myFile")
 	if err != nil {
@@ -36,14 +36,14 @@ func checkUpload(w http.ResponseWriter, r *http.Request) *stuff.HttpCodeError {
 	if handler.Size == 0 {
 		log.Println("lmao this is wrong")
 
-		return &stuff.HttpCodeError{Err: "your file is empty ", Code: 400}
+		return &interfaces.HttpCodeError{Err: "your file is empty ", Code: 400}
 
 	}
 
 	g.Go(func() error { return data.UploadFile(file, handler) })
 	if err := g.Wait(); err != nil {
 		log.Println(err)
-		return &stuff.HttpCodeError{Err: "internal server error or that file already exist", Code: 500}
+		return &interfaces.HttpCodeError{Err: "internal server error or that file already exist", Code: 500}
 	}
 	return nil
 }

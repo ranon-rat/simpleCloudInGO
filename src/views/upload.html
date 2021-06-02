@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimpleCloudInGo</title>
+
+  <link rel="stylesheet" href="/public/styles/main.css" />
+  <link rel="stylesheet" href="/public/styles/header.css" />
+  <link rel="stylesheet" href="/public/styles/upload.css" />
+</head>
+
+<body>
+  <header class="headerContainer">
+		<div class="HC_Content">
+			<h1 class="HC_Text">SimpleCloudInGo</h1>
+			<a href="/" class="HC_Button">
+				<img src="/public/images/restore.svg" class="HC_BImage" />
+			</a>
+		</div>
+	</header>
+
+  <div class="uploadContainer">
+    <div class="uploadContent">
+      <div class="uploadStruct">
+        <form enctype="multipart/form-data" action="/upload/" method="POST">
+          <label>
+            <div id="file-input"> <span>choose a file</span> </div>
+            <input type="file" name="myFile" id="file" style="display: none"
+              onchange='javascript: document.getElementById("file-input").innerText=document.getElementById("file").files[0].name;' />
+          </label>
+            <p><input type="submit" value="upload" id="upload-file-button" /></p>
+        </form>
+      </div>
+      <p>I made this for fun its experimental but I want to do more.</p>
+    </div>
+  </div>
+</body>
+
+</html>

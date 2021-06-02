@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+html, body {
+	background-color: #0F0F0F;
+  width: 100%;
+	min-width: 100%;
+	max-width: 100%;
+	height: auto;
+	min-height: 100vh;
+}
