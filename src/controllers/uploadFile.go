@@ -18,7 +18,7 @@ func UploadFile(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Err, err.Code)
 
 		}
-		http.ServeFile(w, r, "./views/upload.html")
+		http.Redirect(w, r, "/1", http.StatusPermanentRedirect)
 	case "GET":
 		http.ServeFile(w, r, "./views/upload.html")
 
